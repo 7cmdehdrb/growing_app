@@ -1,11 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+
+// import views
+import SwitchView from "./view/switchView";
+
+// import parts
+import HeaderView from "./view/headerView";
+import NavbarView from "./view/navbarView";
 
 export default function App() {
+  const [mainState, setMainState] = useState(0);
+
+  /*
+  {
+    0: home
+    1: archive
+    2. album
+    3. menu
+  }
+  */
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <SafeAreaProvider>
+        <HeaderView mainState={mainState} setMainState={setMainState} />
+        <SwitchView mainState={mainState} setMainState={setMainState} />
+        <NavbarView mainState={mainState} setMainState={setMainState} />
+      </SafeAreaProvider>
     </View>
   );
 }
@@ -13,8 +35,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#D8D8D8", // 배경색 설정
   },
 });
