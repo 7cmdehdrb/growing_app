@@ -8,27 +8,67 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import { Rating, SearchBar } from "react-native-elements";
-import { FontAwesome, MaterialIcons, AntDesign } from "@expo/vector-icons";
+import { Rating, SearchBar, ListItem, Divider } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
+import {
+  FontAwesome,
+  MaterialIcons,
+  AntDesign,
+  EvilIcons,
+} from "@expo/vector-icons";
 
 const { width, height } = Dimensions.get("window");
 
 const ListView = () => {
+  const navigation = useNavigation();
+
+  const changeScreen = (screen, data) => {
+    navigation.navigate(screen, data);
+  };
+
   const [search, setSearch] = useState("");
 
+  const folderData = [
+    { id: 1, name: "Folder1" },
+    { id: 2, name: "Folder2" },
+    { id: 3, name: "Folder3" },
+    { id: 4, name: "Folder4" },
+    { id: 5, name: "Folder5" },
+    { id: 6, name: "Folder6" },
+    { id: 7, name: "Folder7" },
+  ];
   var data = [];
 
   for (let index = 0; index < 31; index++) {
     data.push({
       id: index,
-      name: `${index}번째 이름입니다 ABCDE`,
+      name: `${index}번째 이름입니다`,
       url: `https://picsum.photos/seed/${index}/200/200`,
     });
   }
 
+  const renderFolder = ({ item }) => (
+    <TouchableOpacity
+      style={{
+        paddingHorizontal: 10,
+        marginHorizontal: 5,
+        backgroundColor: "#D3D3D3",
+        borderRadius: 10,
+      }}
+    >
+      <Text>{item.name}</Text>
+    </TouchableOpacity>
+  );
+
   const renderItem = ({ item }) => (
-    <TouchableOpacity activeOpacity={0.8} style={styles.listitem}>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      style={styles.listitem}
+      onPress={() => {
+        console.log("Detail");
+        changeScreen("Detail", item);
+      }}
+    >
       <Image style={styles.image} source={{ uri: item.url }}></Image>
       <View style={styles.detail}>
         <View style={styles.detail_name}>
@@ -55,7 +95,7 @@ const ListView = () => {
         {/* Search Bar Container */}
         <SearchBar
           containerStyle={styles.searchBar}
-          inputContainerStyle={{ backgroundColor: "transparent" }}
+          inputContainerStyle={{ backgroundColor: "#D3D3D3", borderRadius: 10 }}
           searchIcon={
             <TouchableOpacity
               activeOpacity={1}
@@ -63,7 +103,7 @@ const ListView = () => {
                 console.log("DO SEARCH");
               }}
             >
-              <FontAwesome name="search" size={20} color="white" />
+              <FontAwesome name="search" size={20} color="black" />
             </TouchableOpacity>
           }
           clearIcon={
@@ -73,7 +113,7 @@ const ListView = () => {
                 setSearch("");
               }}
             >
-              <MaterialIcons name="clear" size={20} color="white" />
+              <MaterialIcons name="clear" size={20} color="black" />
             </TouchableOpacity>
           }
           placeholder="이름으로 검색하기"
@@ -81,6 +121,33 @@ const ListView = () => {
           value={search}
         />
       </View>
+      <View>
+        <FlatList
+          style={{
+            paddingVertical: 5,
+            marginBottom: 10,
+          }}
+          data={folderData}
+          keyExtractor={(item) => item.id}
+          renderItem={renderFolder}
+          ListFooterComponent={
+            <TouchableOpacity
+              style={{
+                paddingHorizontal: 10,
+                marginHorizontal: 5,
+                backgroundColor: "#D3D3D3",
+                borderRadius: 10,
+              }}
+            >
+              <Text>+</Text>
+            </TouchableOpacity>
+          }
+          horizontal={true}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
+      {/* <Divider width={2} color={"gray"} /> */}
       <View style={styles.listContainer}>
         <FlatList
           data={data}
@@ -139,6 +206,9 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     borderRadius: 10,
+    backgroundColor: "transparent",
+    borderColor: "transparent",
+    borderWidth: 5,
   },
 });
 

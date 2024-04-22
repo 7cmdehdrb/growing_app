@@ -11,6 +11,7 @@ import MainView from "./view/mainView";
 import AlbumView from "./view/albumView";
 import ListView from "./view/listView";
 import MenuView from "./view/menuView";
+import DetailView from "./view/detailView";
 
 // import parts
 import HeaderView from "./view/headerView";
@@ -35,6 +36,7 @@ export default function App() {
             <Stack.Screen name="Album" component={AlbumView} />
             <Stack.Screen name="List" component={ListView} />
             <Stack.Screen name="Menu" component={MenuView} />
+            <Stack.Screen name="Detail" component={DetailView} />
           </Stack.Navigator>
           <NavbarView />
         </NavigationContainer>
