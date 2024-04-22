@@ -2,14 +2,23 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Ionicons, Entypo, AntDesign } from "@expo/vector-icons";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 
-const NavbarView = ({ mainState, setMainState }) => {
+const NavbarView = () => {
+  const navigation = useNavigation();
+
+  const changeScreen = (screen) => {
+    navigation.navigate(screen);
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
         activeOpacity={0.9}
         style={styles.bar}
-        onPress={() => setMainState(0)}
+        onPress={() => {
+          changeScreen("Main");
+        }}
       >
         <Entypo name="home" size={30} color="white" />
         <Text style={styles.text}>홈</Text>
@@ -17,7 +26,9 @@ const NavbarView = ({ mainState, setMainState }) => {
       <TouchableOpacity
         activeOpacity={0.9}
         style={styles.bar}
-        onPress={() => setMainState(1)}
+        onPress={() => {
+          changeScreen("List");
+        }}
       >
         <AntDesign name="calendar" size={30} color="white" />
         <Text style={styles.text}>기록</Text>
@@ -25,7 +36,9 @@ const NavbarView = ({ mainState, setMainState }) => {
       <TouchableOpacity
         activeOpacity={0.9}
         style={styles.bar}
-        onPress={() => setMainState(2)}
+        onPress={() => {
+          changeScreen("Album");
+        }}
       >
         <Ionicons name="albums" size={30} color="white" />
         <Text style={styles.text}>엘범</Text>
@@ -33,7 +46,9 @@ const NavbarView = ({ mainState, setMainState }) => {
       <TouchableOpacity
         activeOpacity={0.9}
         style={styles.bar}
-        onPress={() => setMainState(3)}
+        onPress={() => {
+          changeScreen("Menu");
+        }}
       >
         <Entypo name="menu" size={30} color="white" />
         <Text style={styles.text}>메뉴</Text>

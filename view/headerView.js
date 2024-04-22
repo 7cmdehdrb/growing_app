@@ -3,8 +3,15 @@ import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Header } from "react-native-elements";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 
-const HeaderView = ({ mainState, setMainState }) => {
+const HeaderView = () => {
+  const navigation = useNavigation();
+
+  const changeScreen = (screen) => {
+    navigation.navigate(screen);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Header
@@ -14,7 +21,7 @@ const HeaderView = ({ mainState, setMainState }) => {
             activeOpacity={0.9}
             style={styles.object}
             onPress={() => {
-              setMainState(0);
+              changeScreen("Main");
             }}
           >
             <Entypo name="home" size={24} color="white" />

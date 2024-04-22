@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Rating, SearchBar } from "react-native-elements";
-import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome, MaterialIcons, AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 
@@ -21,7 +22,7 @@ const ListView = () => {
   for (let index = 0; index < 31; index++) {
     data.push({
       id: index,
-      name: `${index}번째 이름`,
+      name: `${index}번째 이름입니다 ABCDE`,
       url: `https://picsum.photos/seed/${index}/200/200`,
     });
   }
@@ -49,7 +50,9 @@ const ListView = () => {
 
   return (
     <View style={styles.container}>
+      {/* 화면 Container */}
       <View style={styles.searchContainer}>
+        {/* Search Bar Container */}
         <SearchBar
           containerStyle={styles.searchBar}
           inputContainerStyle={{ backgroundColor: "transparent" }}
@@ -58,7 +61,6 @@ const ListView = () => {
               activeOpacity={1}
               onPress={() => {
                 console.log("DO SEARCH");
-                data = [];
               }}
             >
               <FontAwesome name="search" size={20} color="white" />
@@ -92,6 +94,12 @@ const ListView = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  searchContainer: {
+    padding: 10,
+  },
+  listContainer: {
     flex: 1,
   },
   listitem: {
@@ -128,13 +136,6 @@ const styles = StyleSheet.create({
   text_name: {
     fontSize: 24,
     fontWeight: "bold",
-  },
-  searchContainer: {
-    // flex: 1,
-    padding: 10,
-  },
-  listContainer: {
-    // flex: 1,
   },
   searchBar: {
     borderRadius: 10,
