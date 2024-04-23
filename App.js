@@ -6,12 +6,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // import views
-import SwitchView from "./view/switchView";
 import MainView from "./view/mainView";
 import AlbumView from "./view/albumView";
 import ListView from "./view/listView";
 import MenuView from "./view/menuView";
 import DetailView from "./view/detailView";
+import ImageView from "./view/imageView";
 
 // import parts
 import HeaderView from "./view/headerView";
@@ -37,6 +37,7 @@ export default function App() {
             <Stack.Screen name="List" component={ListView} />
             <Stack.Screen name="Menu" component={MenuView} />
             <Stack.Screen name="Detail" component={DetailView} />
+            <Stack.Screen name="Image" component={ImageView} />
           </Stack.Navigator>
           <NavbarView />
         </NavigationContainer>
